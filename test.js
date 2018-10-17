@@ -1,5 +1,5 @@
-var friends = [1, 2, 3];
+var val = 50;
 
-
-
-console.log(friends[1] * friends[2]);
+if(val == 50) {
+    console.log('True')
+}

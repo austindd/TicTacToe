@@ -3,14 +3,12 @@
     text-align: center;
 }
 .row {
-    display: table-row;
     clear: both;
     width: 302px;
     margin: 0 auto;
 }
 .row > div{
     float: left;
-    padding: 3em;
     height: 100px;
     width: 100px;
 }
