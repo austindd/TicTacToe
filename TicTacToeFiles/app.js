@@ -35,7 +35,6 @@ function cellClicked(e) {
         if (currentTurn <= 8){
 
             let cellData = e.target.classList;
-            
             cellClassArray.push(cellData);  // cellClassArray will contain all box classes
                                             // in the order they are clicked, for troubleshooting purposes.
             
@@ -57,11 +56,14 @@ function cellClicked(e) {
             
             winLossTie(currentTurn, xArray1, xArray2, oArray1, oArray2); // Determine win/loss/tie
             
-            
+            }
         };
-
         ++currentTurn; // End of turn
+
+        if (currentTurn == 9) {
+            document.getElementById('messageBanner').innerHTML = 'GAME OVER';
     }
+
 };
 
 // cellOutput(currentTurn) returns 'X' or 'O' based on the current turn, used in program to define output to HTML of cell <div>.

@@ -11,6 +11,9 @@
     float: left;
     height: 100px;
     width: 100px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 80px;
+    color: indianred;
 }
 .top {
 border-bottom: 1px solid black;
@@ -24,6 +27,22 @@ border-right: 1px solid black;
 .right {
 border-left: 1px solid black;
 }
-.center {
 
+#pageHeader {
+    color: darkcyan;
+    font-size: 6vh;
+}
+
+#messageBanner {
+    display: block;
+    clear: both;
+    height: 100px;
+    width: 95%;
+    margin: auto;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    text-align: center;
+    color: rgb(131, 20, 20);
+    font-size: 6vh;
+    font-weight: bold;
 }
