@@ -1,3 +1,5 @@
+Console.log('Running JS')
+
 let btn = document.querySelector('button');
 
 btn.addEventListener("click", function() {
