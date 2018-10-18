@@ -9,24 +9,27 @@ let cellClassArray = [];
 // Adding event listener to hear clicks on TicTacToe board
 let cells = document.querySelectorAll('.cell');
 
+
+// MAIN GAME STRUCTURE
+
+
 cells.forEach(function(cell) {
     cell.addEventListener("click", cellClicked);
 });
-
-// MAIN GAME STRUCTURE
 
 // When a cell is clicked, cellClicked() returns list of classes for that cell
 function cellClicked(e) {
     if (userTurn <= 8){
 
         let cellData = e.target.classList;
-        cellClassArray.push(cellData[0], cellData[1], cellData[2]);
+        cellClassArray.push(cellData);
         console.log(cellData);
         console.log(cellData[0]);
         console.log(cellData[1]);
         console.log(cellData[2]);
         console.log('cellClassArray contains', cellClassArray);
         e.target.innerHTML = cellOutput(userTurn);
+        // winLossTie(cellClassArray);
         ++userTurn;
 
     } else if (userTurn > 8){
@@ -59,5 +62,9 @@ function cellOutput(userTurn) {
 
 // winLossTie() analyzes the game board to determine if a win, loss, or tie has occurred.
 function winLossTie(cellClassArray) {
-
-}
+    
+};
+// maybe I should push cellData into an array of objects
+// maybe create an X array and an O array, and push cellData values into them.
+// then check X and O arrays to see if, e.g. 3 'top' values exist, or 3 'left' values,
+// or special case 'left', 'center', 'right' etc.
