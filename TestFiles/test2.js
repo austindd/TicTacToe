@@ -1,4 +1,4 @@
-Console.log('Running JS')
+console.log('Running JS')
 
 let btn = document.querySelector('button');
 
@@ -15,3 +15,15 @@ cells.forEach(function(cell) {
 function cellClicked(e) {
     e.target.innerHTML = 'Hello';
 }
+
+let playerX = {
+    row1: [0, 2, 37],
+    row2: [null, null, null],
+    row3: [null, null, null],
+};
+
+let playerO = {
+    row1: [null, null, null],
+    row2: [null, null, null],
+    row3: [null, null, null],
+};

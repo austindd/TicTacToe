@@ -1,23 +1,20 @@
 // currentTurn will increment up to 8 (end of game) within the cellClicked() function.
 let currentTurn = 0;
+let winner = 'UNDEFINED';
+
+let cellClassArray = [];
 
 // cellClassArray is an object that contains cell objects and their properties.
 // Used for win/loss/tie analysis.
-let cellClassArray = [];
-let xArray1 = [];       // X and O arrays contain all element class names in order of clicked, based on current turn.
-let xArray2 = [];
-let oArray1 = [];
-let oArray2 = [];
 
-
-
+let gameBoard = {
+    row1: [null, null, null],
+    row2: [null, null, null],
+    row3: [null, null, null],
+};
 
 // Adding event listener to hear clicks on TicTacToe board
 let cells = document.querySelectorAll('.cell');
-
-
-// MAIN GAME STRUCTURE
-
 
 cells.forEach(function(cell) {
     cell.addEventListener("click", cellClicked);
@@ -28,41 +25,134 @@ cells.forEach(function(cell) {
 // and pushes class values of cells into arrays for win/loss/tie analysis.
 
 function cellClicked(e) {
+    console.log('----------');
     console.log('Current Turn:', currentTurn);
 
+    let columnIndex = null;
+
     if (e.target.innerHTML == '') {
-
         if (currentTurn <= 8){
-
             let cellData = e.target.classList;
             cellClassArray.push(cellData);  // cellClassArray will contain all box classes
                                             // in the order they are clicked, for troubleshooting purposes.
-            
-            if (currentTurn % 2 == 0) {
-                xArray1.push(cellData[1]);  // cellData[1] is 'top', 'middle', or 'bottom'
-                console.log(xArray1);
-                xArray2.push(cellData[2]);  // cellData[2] is 'left','middle', 'right', or 'center'
-                console.log(xArray2);
-            } else if (currentTurn % 2 == 1) {
-                oArray1.push(cellData[1]);
-                console.log(oArray1);
-                oArray2.push(cellData[2]);
-                console.log(oArray2);
-            }
 
-            console.log('Cell Data:', cellData);
-            e.target.innerHTML = cellOutput(currentTurn);
+            if (cellData[2] == 'left') {            // Identify which column was clicked
+                columnIndex = 0;
+            };
+            if (cellData[2] == 'center') {
+                columnIndex = 1;
+            };
+            if (cellData[2] == 'right') {
+                columnIndex = 2;
+            };
+
+            if (currentTurn % 2 == 0) {                 // If Player X turn
+                if (cellData[1] == 'top') {
+                    gameBoard.row1[columnIndex] = 'X';
+                };
+                if (cellData[1] == 'middle') {
+                    gameBoard.row2[columnIndex] = 'X';
+                };
+                if (cellData[1] == 'bottom') {
+                    gameBoard.row3[columnIndex] = 'X';
+                };
+
+            } else if (currentTurn % 2 == 1) {          // If Player O turn
+                if (cellData[1] == 'top') {
+                    gameBoard.row1[columnIndex] = 'O';
+                };
+                if (cellData[1] == 'middle') {
+                    gameBoard.row2[columnIndex] = 'O';
+                };
+                if (cellData[1] == 'bottom') {
+                    gameBoard.row3[columnIndex] = 'O';
+                };
+            };
             
-            
-            winLossTie(currentTurn, xArray1, xArray2, oArray1, oArray2); // Determine win/loss/tie
-            
-            }
-        };
+            if (winLossTest(gameBoard) == 'X') {
+                console.log("X wins");
+                endGame('X WINS!');
+            };
+            if (winLossTest(gameBoard) == 'O') {
+                console.log('O');
+                endGame('O WINS!');
+            };
+        } else if (currentTurn == 9 && winLossTest(gameBoard) != ('X' || 'O')) {
+            endGame('Tie!');
+        }
+
+        e.target.innerHTML = cellOutput(currentTurn);
         ++currentTurn; // End of turn
+    };
+    console.log('Game Board:', gameBoard);
+};
 
-        if (currentTurn == 9) {
-            document.getElementById('messageBanner').innerHTML = 'GAME OVER';
-    }
+
+
+function winLossTest(gameBoard) {
+    console.log('Testing Win/Loss')
+    // Testing victory conditions for Player X
+
+    if (gameBoard.row1[1] == 'X' && gameBoard.row1[2] == 'X' && gameBoard.row1[3] == 'X') {
+        console.log('X')
+        return 'X';
+    }; 
+    if (gameBoard.row2[1] == 'X' && gameBoard.row2[2] == 'X' && gameBoard.row2[3] == 'X') {
+        console.log('X')
+        return 'X';
+    };
+    if (gameBoard.row3[1] == 'X' && gameBoard.row3[2] == 'X' && gameBoard.row3[3] == 'X') {
+        console.log('X')
+        return 'X';
+    };
+    if (gameBoard.row1[1] == 'X' && gameBoard.row2[1] == 'X' && gameBoard.row3[1] == 'X') {
+        console.log('X')
+        return 'X';
+    };
+    if (gameBoard.row1[2] == 'X' && gameBoard.row2[2] == 'X' && gameBoard.row3[2] == 'X') {
+        console.log('X')
+        return 'X';
+    };
+    if (gameBoard.row1[3] == 'X' && gameBoard.row2[3] == 'X' && gameBoard.row3[3] == 'X') {
+        console.log('X')
+        return 'X';
+    };
+    if (gameBoard.row1[1] == 'X' && gameBoard.row2[2] == 'X' && gameBoard.row3[3] == 'X') {
+        console.log('X')
+        return 'X';
+    };
+    if (gameBoard.row3[1] == 'X' && gameBoard.row2[2] == 'X' && gameBoard.row1[3] == 'X') {
+        console.log('X')
+        return 'X';
+    };
+
+    // Testing victory conditions for Player O
+
+    if (gameBoard.row1[1] == 'O' && gameBoard.row1[2] == 'O' && gameBoard.row1[3] == 'O') {
+        return 'O';
+    }; 
+    if (gameBoard.row2[1] == 'O' && gameBoard.row2[2] == 'O' && gameBoard.row2[3] == 'O') {
+        return 'O';
+    };
+    if (gameBoard.row3[1] == 'O' && gameBoard.row3[2] == 'O' && gameBoard.row3[3] == 'O') {
+        return 'O';
+    };
+    if (gameBoard.row1[1] == 'O' && gameBoard.row2[1] == 'O' && gameBoard.row3[1] == 'O') {
+        return 'O';
+    };
+    if (gameBoard.row1[2] == 'O' && gameBoard.row2[2] == 'O' && gameBoard.row3[2] == 'O') {
+        return 'O';
+    };
+    if (gameBoard.row1[3] == 'O' && gameBoard.row2[3] == 'O' && gameBoard.row3[3] == 'O') {
+        return 'O';
+    };
+    if (gameBoard.row1[1] == 'O' && gameBoard.row2[2] == 'O' && gameBoard.row3[3] == 'O') {
+        return 'O';
+    };
+    if (gameBoard.row3[1] == 'O' && gameBoard.row2[2] == 'O' && gameBoard.row1[3] == 'O') {
+        return 'O';
+    };
+
 
 };
 
@@ -79,49 +169,13 @@ function cellOutput(currentTurn) {
     };
 };
 
-
-// winLossTie() analyzes the game board to determine if a win, loss, or tie has occurred.
-
-function winLossTie(currentTurn, xArray1, xArray2, oArray1, oArray2) {
-    
-    var xCenter = null;
-    var oCenter = null;
-
-    for (let index=0; index <= currentTurn; index++) {
-
-        // Who controls center?
-        if (xArray2[index] == 'center'){
-            xCenter = true;
-            oCenter = false;
-            console.log('X controls center:', xCenter, '|', 'O controls center:', oCenter, 'flag1');
-        };
-        if (oArray2[index] == 'center') {
-            oCenter = true;
-            xCenter = false;
-            console.log('X controls center:', xCenter, '|', 'O controls center:', oCenter, 'flag2');
-        };
-        if (index == currentTurn && xCenter != true) {
-            xCenter = false;
-        };
-        if (index == currentTurn && oCenter != true) {
-            oCenter = false;
-        }; 
-    };
-    console.log('X controls center:', xCenter, '|', 'O controls center:', oCenter, 'flag3');
-
-/*
-    for (let index=0; index < currentTurn; index++) {
-        if (xArray1[index] ) {
-
-        }
-    }
-*/
-    
+function endGame(gameResult) {
+    console.log(gameResult);
+    document.getElementById('messageBanner').innerHTML = 'GAME OVER';
+    document.getElementById('resultBanner').innerHTML = gameResult;
+    document.getElementById('resultBanner').style.display = 'block';
+    document.getElementById('resultBanner').style.backgroundColor = 'lightblue';
+    document.getElementById('resultBanner').style.color = 'darkcyan';
 
 };
 
-
-// maybe I should push cellData into an array of objects
-// maybe create an X array and an O array, and push cellData values into them.
-// then check X and O arrays to see if, e.g. 3 'top' values exist, or 3 'left' values,
-// or special case 'left', 'center', 'right' etc.
