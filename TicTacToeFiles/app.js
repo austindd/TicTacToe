@@ -183,6 +183,7 @@ function cellOutput(currentTurn) {
 function endGame(gameResult) {
     console.log(gameResult);
     gameOver = true;
+    console.log('gameOver =', gameOver)
     document.getElementById('messageBanner').innerHTML = 'GAME OVER';
     document.getElementById('resultBanner').innerHTML = gameResult;
     document.getElementById('resultBanner').style.display = 'block';
@@ -194,18 +195,18 @@ function endGame(gameResult) {
     });
 }
 
-let board = document.querySelectorAll('.board');
-board.forEach(function(board) {
+let boardSelector = document.querySelectorAll('#board');
+boardSelector.forEach(function(board) {
     board.addEventListener("click", boardClicked);
-    
 });
 
+function boardClicked(e) {
 
-function boardClicked() {
     if (gameOver == true) {
 
-        console.log('Board Reset')
+        console.log('Board Reset');
 
+        /*
         document.getElementById('messageBanner').innerHTML = '';
         document.getElementById('resultBanner').innerHTML = '';
         document.getElementById('resultBanner').style.display = 'none';
@@ -222,5 +223,7 @@ function boardClicked() {
         gameBoard.row3[0] = null; 
         gameBoard.row3[1] = null; 
         gameBoard.row3[2] = null;
+
+        */
     };
 };
