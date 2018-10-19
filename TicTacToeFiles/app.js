@@ -145,6 +145,23 @@ function winLossTest(gameBoard) {
     };
 
 
+    // Testing tie conditions
+        if (gameBoard.row1[0] != null && 
+            gameBoard.row1[1] != null && 
+            gameBoard.row1[2] != null &&
+            
+            gameBoard.row2[0] != null && 
+            gameBoard.row2[1] != null && 
+            gameBoard.row2[2] != null &&
+
+            gameBoard.row3[0] != null && 
+            gameBoard.row3[1] != null && 
+            gameBoard.row3[2] != null &&
+
+            currentTurn < 9) {
+            endGame('TIE GAME');
+        };
+
 };
 
 // cellOutput(currentTurn) returns 'X' or 'O' based on the current turn, used in program to define output to HTML of cell <div>.
@@ -168,5 +185,6 @@ function endGame(gameResult) {
     document.getElementById('resultBanner').style.backgroundColor = 'lightblue';
     document.getElementById('resultBanner').style.color = 'darkcyan';
 
+    
 };
 
