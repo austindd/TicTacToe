@@ -77,9 +77,9 @@ function cellClicked(e) {
                 console.log('O');
                 endGame('O WINS!');
             };
-        } else if (currentTurn == 9 && winLossTest(gameBoard) != ('X' || 'O')) {
+        } else if (currentTurn == 8 && winLossTest(gameBoard) != ('X' || 'O')) {
             endGame('Tie!');
-        }
+        };
 
         e.target.innerHTML = cellOutput(currentTurn);
         ++currentTurn; // End of turn
@@ -88,53 +88,47 @@ function cellClicked(e) {
 };
 
 
-
 function winLossTest(gameBoard) {
     console.log('Testing Win/Loss')
     // Testing victory conditions for Player X
 
-    if (gameBoard.row1[1] == 'X' && gameBoard.row1[2] == 'X' && gameBoard.row1[3] == 'X') {
-        console.log('X')
+    if (gameBoard.row1[0] == 'X' && gameBoard.row1[1] == 'X' && gameBoard.row1[2] == 'X') {
         return 'X';
     }; 
-    if (gameBoard.row2[1] == 'X' && gameBoard.row2[2] == 'X' && gameBoard.row2[3] == 'X') {
-        console.log('X')
+    if (gameBoard.row2[0] == 'X' && gameBoard.row2[1] == 'X' && gameBoard.row2[2] == 'X') {
         return 'X';
     };
-    if (gameBoard.row3[1] == 'X' && gameBoard.row3[2] == 'X' && gameBoard.row3[3] == 'X') {
-        console.log('X')
+    if (gameBoard.row3[0] == 'X' && gameBoard.row3[1] == 'X' && gameBoard.row3[2] == 'X') {
+        return 'X';
+    };
+    if (gameBoard.row1[0] == 'X' && gameBoard.row2[0] == 'X' && gameBoard.row3[0] == 'X') {
         return 'X';
     };
     if (gameBoard.row1[1] == 'X' && gameBoard.row2[1] == 'X' && gameBoard.row3[1] == 'X') {
-        console.log('X')
         return 'X';
     };
     if (gameBoard.row1[2] == 'X' && gameBoard.row2[2] == 'X' && gameBoard.row3[2] == 'X') {
-        console.log('X')
         return 'X';
     };
-    if (gameBoard.row1[3] == 'X' && gameBoard.row2[3] == 'X' && gameBoard.row3[3] == 'X') {
-        console.log('X')
+    if (gameBoard.row1[0] == 'X' && gameBoard.row2[1] == 'X' && gameBoard.row3[2] == 'X') {
         return 'X';
     };
-    if (gameBoard.row1[1] == 'X' && gameBoard.row2[2] == 'X' && gameBoard.row3[3] == 'X') {
-        console.log('X')
-        return 'X';
-    };
-    if (gameBoard.row3[1] == 'X' && gameBoard.row2[2] == 'X' && gameBoard.row1[3] == 'X') {
-        console.log('X')
+    if (gameBoard.row3[0] == 'X' && gameBoard.row2[1] == 'X' && gameBoard.row1[2] == 'X') {
         return 'X';
     };
 
     // Testing victory conditions for Player O
 
-    if (gameBoard.row1[1] == 'O' && gameBoard.row1[2] == 'O' && gameBoard.row1[3] == 'O') {
+    if (gameBoard.row1[0] == 'O' && gameBoard.row1[1] == 'O' && gameBoard.row1[2] == 'O') {
         return 'O';
     }; 
-    if (gameBoard.row2[1] == 'O' && gameBoard.row2[2] == 'O' && gameBoard.row2[3] == 'O') {
+    if (gameBoard.row2[0] == 'O' && gameBoard.row2[1] == 'O' && gameBoard.row2[2] == 'O') {
         return 'O';
     };
-    if (gameBoard.row3[1] == 'O' && gameBoard.row3[2] == 'O' && gameBoard.row3[3] == 'O') {
+    if (gameBoard.row3[0] == 'O' && gameBoard.row3[1] == 'O' && gameBoard.row3[2] == 'O') {
+        return 'O';
+    };
+    if (gameBoard.row1[0] == 'O' && gameBoard.row2[0] == 'O' && gameBoard.row3[0] == 'O') {
         return 'O';
     };
     if (gameBoard.row1[1] == 'O' && gameBoard.row2[1] == 'O' && gameBoard.row3[1] == 'O') {
@@ -143,13 +137,10 @@ function winLossTest(gameBoard) {
     if (gameBoard.row1[2] == 'O' && gameBoard.row2[2] == 'O' && gameBoard.row3[2] == 'O') {
         return 'O';
     };
-    if (gameBoard.row1[3] == 'O' && gameBoard.row2[3] == 'O' && gameBoard.row3[3] == 'O') {
+    if (gameBoard.row1[0] == 'O' && gameBoard.row2[1] == 'O' && gameBoard.row3[2] == 'O') {
         return 'O';
     };
-    if (gameBoard.row1[1] == 'O' && gameBoard.row2[2] == 'O' && gameBoard.row3[3] == 'O') {
-        return 'O';
-    };
-    if (gameBoard.row3[1] == 'O' && gameBoard.row2[2] == 'O' && gameBoard.row1[3] == 'O') {
+    if (gameBoard.row3[0] == 'O' && gameBoard.row2[1] == 'O' && gameBoard.row1[2] == 'O') {
         return 'O';
     };
 
