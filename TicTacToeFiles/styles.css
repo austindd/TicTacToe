@@ -1,4 +1,6 @@
 #board {
+    height: 87%;
+    width: 87%;
     padding: 3em;
     text-align: center;
 }

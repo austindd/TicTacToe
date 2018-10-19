@@ -1,7 +1,7 @@
 // currentTurn will increment up to 8 (end of game) within the cellClicked() function.
 let currentTurn = 0;
 let winner = 'UNDEFINED';
-
+let gameOver = false;
 let cellClassArray = [];
 
 // cellClassArray is an object that contains cell objects and their properties.
@@ -31,6 +31,9 @@ function cellClicked(e) {
     let columnIndex = null;
 
     if (e.target.innerHTML == '') {
+
+        e.target.innerHTML = cellOutput(currentTurn);
+
         if (currentTurn <= 8){
             let cellData = e.target.classList;
             cellClassArray.push(cellData);  // cellClassArray will contain all box classes
@@ -81,7 +84,6 @@ function cellClicked(e) {
             endGame('Tie!');
         };
 
-        e.target.innerHTML = cellOutput(currentTurn);
         ++currentTurn; // End of turn
     };
     console.log('Game Board:', gameBoard);
@@ -167,24 +169,58 @@ function winLossTest(gameBoard) {
 // cellOutput(currentTurn) returns 'X' or 'O' based on the current turn, used in program to define output to HTML of cell <div>.
 
 function cellOutput(currentTurn) {
-
-    if (currentTurn % 2 == 0) {
-        return 'X';
-    } else if (currentTurn % 2 == 1) {
-        return 'O';
-    } else {
-        console.log('Error: currentTurn undefined');
+    if (gameOver == false) {
+        if (currentTurn % 2 == 0) {
+            return 'X';
+        } else if (currentTurn % 2 == 1) {
+            return 'O';
+        } else {
+            console.log('Error: currentTurn undefined');
+        };
     };
 };
 
 function endGame(gameResult) {
     console.log(gameResult);
+    gameOver = true;
     document.getElementById('messageBanner').innerHTML = 'GAME OVER';
     document.getElementById('resultBanner').innerHTML = gameResult;
     document.getElementById('resultBanner').style.display = 'block';
     document.getElementById('resultBanner').style.backgroundColor = 'lightblue';
     document.getElementById('resultBanner').style.color = 'darkcyan';
 
-    
-};
+    cells.forEach(function(cell) {
+        cell.removeEventListener("click", cellClicked);
+    });
+}
 
+let board = document.querySelectorAll('.board');
+board.forEach(function(board) {
+    board.addEventListener("click", boardClicked);
+    
+});
+
+
+function boardClicked() {
+    if (gameOver == true) {
+
+        console.log('Board Reset')
+
+        document.getElementById('messageBanner').innerHTML = '';
+        document.getElementById('resultBanner').innerHTML = '';
+        document.getElementById('resultBanner').style.display = 'none';
+        
+
+        gameBoard.row1[0] = null;
+        gameBoard.row1[1] = null; 
+        gameBoard.row1[2] = null;
+        
+        gameBoard.row2[0] = null; 
+        gameBoard.row2[1] = null;
+        gameBoard.row2[2] = null;
+
+        gameBoard.row3[0] = null; 
+        gameBoard.row3[1] = null; 
+        gameBoard.row3[2] = null;
+    };
+};
