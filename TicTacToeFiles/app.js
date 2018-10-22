@@ -82,6 +82,8 @@ function cellClicked(e) {
             };
         } else if (currentTurn == 8 && winLossTest(gameBoard) != ('X' || 'O')) {
             endGame('Tie!');
+
+            
         };
 
         ++currentTurn; // End of turn
@@ -193,12 +195,15 @@ function endGame(gameResult) {
     cells.forEach(function(cell) {
         cell.removeEventListener("click", cellClicked);
     });
+
 }
 
 let boardSelector = document.querySelectorAll('#board');
 boardSelector.forEach(function(board) {
     board.addEventListener("click", boardClicked);
 });
+
+
 
 function boardClicked(e) {
 
@@ -227,3 +232,5 @@ function boardClicked(e) {
         */
     };
 };
+
+
