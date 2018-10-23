@@ -14,11 +14,14 @@ let gameBoard = {
 };
 
 // Adding event listener to hear clicks on TicTacToe board
-let cells = document.querySelectorAll('.cell');
+if (gameOver=false) {
+    let cells = document.querySelectorAll('.cell');
 
-cells.forEach(function(cell) {
-    cell.addEventListener("click", cellClicked);
-});
+    cells.forEach(function(cell) {
+        cell.addEventListener("click", cellClicked);
+    });
+}
+
 
 
 // When a cell is clicked, cellClicked() initiates game structure,
@@ -187,10 +190,11 @@ function endGame(gameResult) {
     gameOver = true;
     console.log('gameOver =', gameOver)
     document.getElementById('messageBanner').innerHTML = 'GAME OVER';
+    document.getElementById('messageBanner').style.display = 'block'
     document.getElementById('resultBanner').innerHTML = gameResult;
     document.getElementById('resultBanner').style.display = 'block';
-    document.getElementById('resultBanner').style.backgroundColor = 'lightblue';
-    document.getElementById('resultBanner').style.color = 'darkcyan';
+    document.getElementById('resetButton').style.display = 'block';
+
 
     cells.forEach(function(cell) {
         cell.removeEventListener("click", cellClicked);
@@ -198,24 +202,23 @@ function endGame(gameResult) {
 
 }
 
-let boardSelector = document.querySelectorAll('#board');
-boardSelector.forEach(function(board) {
-    board.addEventListener("click", boardClicked);
+let resetButton = document.querySelectorAll('#resetButton');
+resetButton.forEach(function(reset) {
+    reset.addEventListener("click", resetButtonClicked);
 });
 
 
 
-function boardClicked(e) {
+function resetButtonClicked(e) {
 
     if (gameOver == true) {
 
         console.log('Board Reset');
 
-        /*
         document.getElementById('messageBanner').innerHTML = '';
         document.getElementById('resultBanner').innerHTML = '';
         document.getElementById('resultBanner').style.display = 'none';
-        
+        document.getElementsByClassName('cell').innerHTML = '';
 
         gameBoard.row1[0] = null;
         gameBoard.row1[1] = null; 
@@ -229,7 +232,10 @@ function boardClicked(e) {
         gameBoard.row3[1] = null; 
         gameBoard.row3[2] = null;
 
-        */
+        gameResult = null;
+        gameOver = false;
+
+
     };
 };
 

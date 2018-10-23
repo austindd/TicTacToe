@@ -36,7 +36,7 @@ border-left: 1px solid black;
 }
 
 #messageBanner {
-    display: block;
+    display: none;
     clear: both;
     height: 100px;
     width: 95%;
@@ -62,5 +62,20 @@ border-left: 1px solid black;
     border-radius: 1em;
     font-family: 'Times New Roman', Times, serif;
     font-size: 10vh;
+    font-weight: bold;
+    color: darkcyan;
+    background-color: lightblue;
+}
+
+#resetButton {
+    display: none;
+    clear: both;
+    height: 5%;
+    width: 20%;
+    color: darkcyan;
+    background-color: lightblue;
+    margin: auto;
+    border-radius: 0.75em;
+    font-size: 90%;
     font-weight: bold;
 }
